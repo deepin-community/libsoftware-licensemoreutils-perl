@@ -1,0 +1,50 @@
+1.005 2020-11-15
+
+  * document that GPL licenses with "or any later version" are
+    accepted. (e.g. GPL-2+ for GPL v 2 or any later version)
+  
+1.004 2018-11-02
+
+  * fix CPAN tester tests: test full text instead of summary text
+    on non debian system
+  * fix full text extraction of LGPL_2 license
+
+1.003 2018-11-01
+
+  * add notice to summary (Debian #911403)
+    Thanks to Felix Lechner for the patch
+  * add GFDL_1_2 and GFDL_1_3 license summaries
+
+1.002 2018-07-17
+
+  * Fix LGPL2.1 summary
+
+1.001 2018-07-06
+
+  * add MPL short names (Debian #865472)
+
+0.005 2018-06-29
+
+  * deprecate new_license_with_summary constructor in favor
+    of new_from_short_name
+  * fix detection of Debian distro
+  * add license_class method
+
+0.004 2018-05-28
+
+  * move LGPL_2 license in Software::LicenseMoreUtils
+
+0.003 2018-05-26
+
+  * add MPL_1_1 and MPL_2_0 summaries (Debian #865472)
+  * add CC0_1_0 summary (Debian #887926)
+  * fix examples in pod doc
+
+0.002 2018-05-21
+
+  * fix tests for non-Debian distributions. Tx Slaven (gh #1)
+  * avoid undef warning when distro file does not exist
+
+0.001 2018-05-20
+
+  First version

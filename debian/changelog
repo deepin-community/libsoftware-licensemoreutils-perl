@@ -1,0 +1,69 @@
+libsoftware-licensemoreutils-perl (1.005-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ gregor herrmann ]
+  * debian/watch: use uscan version 4.
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 10 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Remove obsolete fields Contact, Name from debian/upstream/metadata
+    (already present in machine-readable debian/copyright).
+
+  [ gregor herrmann ]
+  * Import upstream version 1.005.
+   * document GPL "or any later version" variants
+  * Update Bug-Submit in debian/upstream/metadata.
+  * Declare compliance with Debian Policy 4.5.1.
+  * Set Rules-Requires-Root: no.
+  * Annotate test-only build dependencies with <!nocheck>.
+  * Bump debhelper-compat to 13.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 21 Nov 2020 18:09:54 +0100
+
+libsoftware-licensemoreutils-perl (1.004-1) unstable; urgency=medium
+
+  * New upstream version 1.004
+   * fix full text extraction of LGPL_2 license
+   * add notice to summary (Closes: #911403)
+     Thanks to Felix Lechner for the patch
+   * add GFDL_1_2 and GFDL_1_3 license summaries
+  * control: declare compliance with policy 4.2.1
+
+ -- Dominique Dumont <dod@debian.org>  Sat, 03 Nov 2018 08:34:53 +0100
+
+libsoftware-licensemoreutils-perl (1.002-1) unstable; urgency=medium
+
+  * New upstream version 1.002
+    * Fix LGPL2.1 summary
+
+ -- Dominique Dumont <dod@debian.org>  Tue, 17 Jul 2018 19:26:14 +0200
+
+libsoftware-licensemoreutils-perl (1.001-1) unstable; urgency=medium
+
+  [ gregor herrmann ]
+  * debian/*: update GitHub URLs to use HTTPS.
+
+  [ Dominique Dumont ]
+  * New upstream version 1.001
+    * add MPL short names (Closes: #865472)
+  * control: declare compliance with policy 4.1.5
+
+ -- Dominique Dumont <dod@debian.org>  Sat, 07 Jul 2018 18:19:01 +0200
+
+libsoftware-licensemoreutils-perl (0.005-1) unstable; urgency=medium
+
+  * New upstream version 0.005
+    * deprecate new_license_with_summary constructor in favor
+      of new_from_short_name
+    * fix detection of Debian distro
+    * add license_class method
+
+ -- Dominique Dumont <dod@debian.org>  Sat, 30 Jun 2018 10:06:51 +0200
+
+libsoftware-licensemoreutils-perl (0.004-1) unstable; urgency=medium
+
+  * Initial release. (Closes: 900271)
+
+ -- Dominique Dumont <dod@debian.org>  Mon, 28 May 2018 18:39:34 +0200
