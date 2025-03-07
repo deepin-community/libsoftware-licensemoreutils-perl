@@ -4,11 +4,11 @@ Upstream-Contact: Dominique Dumont
 Source: https://metacpan.org/release/Software-LicenseMoreUtils
 
 Files: *
-Copyright: 2018, Dominique Dumont <dod@debian.org>
+Copyright: 2018,2020,2022 Dominique Dumont <dod@debian.org>
 License: Artistic or GPL-1+
 
 Files: debian/*
-Copyright: 2018, Dominique Dumont <dod@debian.org>
+Copyright: 2018,2020,2022 Dominique Dumont <dod@debian.org>
 License: Artistic or GPL-1+
 
 License: Artistic
