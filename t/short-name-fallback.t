@@ -7,26 +7,50 @@ use Test::Exception;
 my $class = 'Software::LicenseMoreUtils';
 require_ok($class);
 
-# test short_name retrieved by Software::LicenseUtils
-my $gpl_lic = $class->new_from_short_name({
-    short_name => 'GPL-1',
-    holder => 'X. Ample'
-});
+my @tests = (
+    'Apache-1.1' => 'Software::License::Apache_1_1',
+    'Apache-2.0' => 'Software::License::Apache_2_0',
+    'GPL-1'      => 'Software::License::GPL_1',
+    'GPL-1+'     => 'Software::License::GPL_1',
+    'GPL-2+'     => 'Software::License::GPL_2',
+    'GPL-3+'     => 'Software::License::GPL_3',
+    'GPL-3.0+'   => 'Software::License::GPL_3',
+    # There's no LGPL-1
+    'LGPL-2'     => 'Software::LicenseMoreUtils::LGPL_2',
+    'LGPL-2+'    => 'Software::LicenseMoreUtils::LGPL_2',
+    'LGPL-2.0'   => 'Software::LicenseMoreUtils::LGPL_2',
+    'LGPL-2.1'   => 'Software::License::LGPL_2_1',
+    'LGPL-2.1+'  => 'Software::License::LGPL_2_1',
+    'LGPL-3'     => 'Software::License::LGPL_3_0',
+    'LGPL-3+'    => 'Software::License::LGPL_3_0',
+    'LGPL-3.0'   => 'Software::License::LGPL_3_0',
+    'LGPL-3.0+'  => 'Software::License::LGPL_3_0',
+    'LGPL_2'     => 'Software::LicenseMoreUtils::LGPL_2',
+    'LGPL_2+'    => 'Software::LicenseMoreUtils::LGPL_2',
+    'MIT'        => 'Software::License::MIT',
+    'PostgreSQL' => 'Software::License::PostgreSQL',
+    'Zlib'       => 'Software::License::Zlib',
 
-is($gpl_lic->license_class,'Software::License::GPL_1',"license class");
+    # SPDX identifiers handled by Software::LicenseUtils
+    'GPL-1.0-or-later'  => 'Software::License::GPL_1',
+    'GPL-2.0-or-later'  => 'Software::License::GPL_2',
+    'GPL-3.0-or-later'  => 'Software::License::GPL_3',
+    'LGPL-2.0-or-later' => 'Software::LicenseMoreUtils::LGPL_2',
+    'LGPL-2.1-or-later' => 'Software::License::LGPL_2_1',
+    'LGPL-3.0-only'     => 'Software::License::LGPL_3_0',
+    'LGPL-3.0-or-later' => 'Software::License::LGPL_3_0',
+);
 
-# test fall back
-my $mit_lic = $class->new_from_short_name({
-    short_name => 'MIT',
-    holder => 'X. Ample'
-});
-is($mit_lic->license_class,'Software::License::MIT',"license class");
+while (@tests) {
+    my ($short_name, $lic_class) = splice @tests, 0, 2;
 
-my $apache_lic = $class->new_from_short_name({
-    short_name => 'Apache-2.0',
-    holder => 'X. Ample'
-});
-is($apache_lic->license_class,'Software::License::Apache_2_0',"license class");
+    my $lic = $class->new_from_short_name({
+        short_name => $short_name,
+        holder => 'X. Ample'
+    });
+
+    is($lic->license_class, $lic_class,"short name: $short_name");
+}
 
 # test also fulltext
 my $lgpl_2_lic = $class->new_from_short_name({

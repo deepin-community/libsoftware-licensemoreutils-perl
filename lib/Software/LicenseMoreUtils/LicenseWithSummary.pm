@@ -1,13 +1,13 @@
 #
 # This file is part of Software-LicenseMoreUtils
 #
-# This software is copyright (c) 2018 by Dominique Dumont.
+# This software is copyright (c) 2018, 2022 by Dominique Dumont.
 #
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
 package Software::LicenseMoreUtils::LicenseWithSummary;
-$Software::LicenseMoreUtils::LicenseWithSummary::VERSION = '1.005';
+$Software::LicenseMoreUtils::LicenseWithSummary::VERSION = '1.009';
 # ABSTRACT: Software::License with a summary
 
 use strict;
@@ -45,9 +45,10 @@ sub new {
     my $self = {
         license => $args->{license},
         or_later => $args->{or_later},
+        holder => $args->{holder},
     };
 
-    bless $self, $class;
+    return bless $self, $class;
 }
 
 sub distribution { return $distro }
@@ -83,17 +84,33 @@ sub debian_text {
 }
 
 sub summary_or_text {
-    my $self = shift;
-    return join("\n",  grep { $_ } ($self->notice, $self->summary))
-        if length $self->summary;
-    return $self->fulltext;
+    my ($self) = @_;
+    my $text;
+    if (length $self->summary and $self->{holder}) {
+        $text = join("\n",  grep { $_ } ($self->notice, $self->summary));
+    }
+    elsif (length $self->summary) {
+        $text = $self->summary;
+    }
+    elsif ($self->{holder}) {
+        $text =  $self->fulltext;
+    }
+    else {
+        $text = $self->license;
+    }
+    return $text;
 }
 
 sub AUTOLOAD {
-    my $self = shift;
+    my ($self, @args) = @_;
     my $lic = $self->{license};
     my ($sub) = ($AUTOLOAD =~ /(\w+)$/);
-    return $lic->$sub(@_) if ($lic and $sub ne 'DESTROY');
+    if ($lic and $sub ne 'DESTROY') {
+        return $lic->$sub(@args);
+    }
+    else {
+        return;
+    }
 }
 
 1;
@@ -110,7 +127,7 @@ Software::LicenseMoreUtils::LicenseWithSummary - Software::License with a summar
 
 =head1 VERSION
 
-version 1.005
+version 1.009
 
 =head1 SYNOPSIS
 
@@ -133,9 +150,10 @@ Returns the license summary, or an empty string.
 
 =head2 summary_or_text
 
-Returns the license summary or the full text of the license. Like
-L<Software::License/fulltext>, this method returns also the copyright
-notice (if available).
+Returns the license summary or the text of the license. Like
+L<Software::License/fulltext>, this method also returns the copyright
+notice B<if> C<holder> parameter was set when calling
+L<Software::LicenseMoreUtils/new_from_short_name>.
 
 =head2 distribution
 
@@ -153,7 +171,7 @@ Dominique Dumont
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2018 by Dominique Dumont.
+This software is copyright (c) 2018, 2022 by Dominique Dumont.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
